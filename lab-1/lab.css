@@ -1,0 +1,33 @@
+body{
+    background-color: lightblue;
+}
+.bg{
+    padding-top: 50px;
+    text-align: center;
+    margin: auto;
+}
+.title1{
+    background-color: rgba(8, 87, 139, 0.555);
+    padding: 10px;
+    font-family: 'Mali';
+    border-radius: 10px;
+    height: 15%;
+    width: 19%;
+    margin-left: 40%;
+
+}
+h5{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: 'Mali';
+}
+.mul{
+    text-align: center;
+    margin-left: 40%;
+    padding-top: 5px;
+    font-family: 'Mali';
+    background-color: white;
+    border-radius: 10px;
+    height: 15%;
+    width: 20%;
+}
