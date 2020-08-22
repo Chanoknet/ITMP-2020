@@ -5,23 +5,34 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<link rel="stylesheet" type="text/css" href="lab.css">
+	<link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div id="app">
 		About
-		<h3>Username : {{person.username}}</h3>
-		<h3>Name : {{person.name}}</h3>
-		<h3>email : {{person.email}}</h3>
-		<h3>website : {{person.website}}</h3>
-		<h3>company : {{person.company.name}}</h3>
+		<h3>Username : {{person.title}}</h3>
+		<h3>Name : {{person.description}}</h3>
+		<h3>email : {{person.director}}</h3>
+		<h3>website : {{person.producer}}</h3>
+		<h3>company : {{person.release_date}}</h3>
+		<button @click="isthisgood">หนังเรื่องนี้เป็นหนังที่ดีหรือไม่</button>
+		<h2>{{yesno.answer}}</h2>
+		<img :src="yesno.image" alt="">
 
-		users
-		<h2 v-for="u in users" :data-id="u.id" @click="viewBio(u)">{{u.username}}</h2>
+		<div>
+			<h1>Movies</h1>
+			<h2 v-for="u in users" :data-id="u.id" @click="viewBio(u)">
+				<img :src="`https://picsum.photos/id/1${u.id[14],u.rt_score[0,1]}/200/200`">
+				{{u.title}}
+				
+			</h2>
+		</div>
 	</div>
 	
 
 	<script>
-		fetch('https://jsonplaceholder.typicode.com/users')
+		fetch('https://ghibliapi.herokuapp.com/films/')
 		.then(response => response.json())
 		.then(json => {
 			console.log(json)
@@ -34,47 +45,44 @@
 			methods:{
 				viewBio: function(users){
 					this.person = users
-
+				},
+				isthisgood: function(){
+					fetch('https://yesno.wtf/api')
+					.then(response => response.json())
+					.then(json => {
+							console.log(json)
+							app.yesno = json
+							})
 				}
 
 			},
 			data: {
+				yesno:{
+					"answer": "ลองคลิกดูสิ",
+					"forced": false,
+					"image": ""
+				},
 				person:{
-					"id": 1,
-					"name": "___",
-					"username": "___",
-					"email": "___",
-					"phone": "___",
-					"website": "___",
-					"company": {
-						"name": "___",
-						"catchPhrase": "Multi-layered client-server neural-net",
-						"bs": "harness real-time e-markets"
-					}
+					"id": "_______",
+					"title": "___",
+					"description": "___",
+					"director": "___",
+					"producer": "___",
+					"release_date": "___",
 				},
 				users :[
 				{
-					"id": 1,
-					"name": "___",
-					"username": "___",
-					"email": "___",
-					"phone": "___",
-					"website": "___",
-					"company": {
-						"name": "___",
-						"catchPhrase": "Multi-layered client-server neural-net",
-						"bs": "harness real-time e-markets"
-					}
+					"id": "_______",
+					"title": "___",
+					"description": "___",
+					"director": "___",
+					"producer": "___",
+					"release_date": "___",
 				}
 			]
 				
 			}
 		})
-		//function viewBio(h2){
-		//	let id = h2.dataset.id
-		//	app.person = app.users[id-1]
-		//	console.log(id)
-		//}
 
 	</script>
 </body>
