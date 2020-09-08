@@ -10,7 +10,7 @@
 	<div id="canvas">
 		<section id="canvas_header">
 			<div>
-				คุณแยกผลไม้ได้แล้ว {{score}} ชิ้น
+				คะแนนของคุณตอนนี้ {{score}} ชิ้น
 			</div>
 		</section>
 		<section id="canvas_main" 
@@ -19,7 +19,7 @@
 				<div class="box _path" 
 				v-for="i in 14" 
 				:data-pst="i"></div>
-				<div class="box _toggle" data-pst="10" data-isrightarrow="1"></div>
+				<div class="box _toggle" data-pst="10" :data-isrightarrow="isRightArrow"></div>
 
 				<div class="box _fruit" v-for="f in fruits" :data-pst="f.pst" 
 				:data-type="f.type"></div>
@@ -31,7 +31,7 @@
 			</main>
 		</section>
 		<section id="canvas_footer">
-			<div v-if="play" class="btn" id="toggle">
+			<div v-if="play" class="btn" id="toggle" @click="change()">
 				Toggle
 			</div>
 			<div v-if="!play" class="btn" id="endgame">
@@ -45,8 +45,8 @@
 			let shift = (stop-start)+1
 			return Math.floor(Math.random()*100%shift)+start
 		}
-		
-		let nextFr = 3
+		let fruitCount = 3
+		let nextfruitid  = 3
 		let isRightArrow = 1
 		let speed = 1000
 		let app = new Vue({
@@ -63,15 +63,43 @@
 					
 				]
 			},
-			methods:{},
+			methods:{
+				change: function(){
+					if (this.isRightArrow == 1){
+						this.isRightArrow = 0
+					}else{
+						this.isRightArrow = 1
+					}
+				}
+			},
 			computed:{},
 			watch:{
 				turn: function (x) {
+					
+
 					let count = this.fruits.length
 					for (let f in this.fruits){
 						let run = this.fruits[f].run
 						if (run){
 							this.fruits[f].pst = this.fruits[f].pst+1
+							if (this.fruits[f].pst == 12 || this.fruits[f].pst == 16){
+								if (this.fruits[f].pst == 12 && this.fruits.type == 'red' && this.fruits[f].run == true){
+									this.fruits[f].run = false
+									this.score ++
+								}
+								else if (this.fruits[f].pst == 16 && this.fruits.type == 'yellow' && this.fruits[f].run == true) {
+									this.fruits[f].run = false
+									this.score ++
+								}
+								else if (this.fruits[f].pst == 16 && this.fruits.type == 'red') {
+									this.fruits[f].run = false
+									this.score ++
+								}
+								else if (this.fruits[f].pst == 12 && this.fruits.type == 'yellow') {
+									this.fruits[f].run = false
+									this.score ++
+								}
+							}	
 						}
 						console.log()
 					}
