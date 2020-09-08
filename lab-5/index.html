@@ -55,15 +55,23 @@
 				isRightArrow: isRightArrow,
 				speed: speed,
 				play:true,
-				time:0,
+				turn:0,
 				score:0,
 				fruits:[
-					{id:1,type:'red',pst:6,run:true,step:1},
-					{id:2,type:'yellow',pst:3,run:true,step:1},
+					{id:1,type:'red',pst:5,run:true,step:1},
+					{id:2,type:'yellow',pst:2,run:true,step:1},
 					
 				]
+			},
+			methods:{},
+			computed:{
+				
 			}
 		})
+
+		let playing = setTnterval(function(){
+			app.turn++
+		},speed)
 	</script>
 </body>
 </html>
