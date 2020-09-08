@@ -70,7 +70,6 @@
 				},
 				correct: function(){
 					//เข้าด่านต่อไป
-					document.querySelector('#canvas').style.setProperty('--picklight',picklight);
 					this.row = rand(2,6)
 					this.pick = rand(1,this.row*this.row)
 					this.h = rand(0,360)
@@ -92,6 +91,7 @@
 		
 		let counter = setInterval(()=>{
 			if (app.time>0) {
+				document.querySelector('#canvas').style.setProperty('--picklight',picklight);
 				app.time--
 			}else{
 				clearInterval(counter)
